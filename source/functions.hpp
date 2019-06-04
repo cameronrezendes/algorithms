@@ -329,5 +329,3 @@ TEST_CASE("testing sorted array check function") {
   CHECK(!is_sorted(arr5, 4));
   CHECK(is_sorted(arr5, 3));
 }
-
-#endif
