@@ -47,34 +47,50 @@ String::String(char* str) {
 String::~String() {
   delete[] array;
 }
+//---------------------------------------------------------------------------------------
 
 /** at(int position)
    * Returns the character at the given position, throws an exception if the
    * position is out of bounds.
-   * O(?)
+   * O(2)
    */
   char String::at(int x) const{
-      return 'a';
+      if(array[x]<0){
+          throw "Enter a position within the parameter";
+      }
+      else{
+        return array[x];
+      }
   }
 
   /** empty()
    * Returns whether or not the string is empty.
-   * O(?)
+   * O(2)
    */
   bool String::empty() const{
-      return true;
+      if(array[0]==NULL){
+          return true;
+      }
+      else{
+          return false;
+      }
   }
 
   /** size()
    * Returns the number of characters in the string.
+   * 0(n)
    */
   unsigned int String::size() const{
-      return 1;
+      int length=0;
+      for(int i=0;array[i]!=NULL;i++){
+          length ++;
+      }
+      return length;
   }
 
   /** capacity()
    * Returns the number of characters that the string can hold.
-   * O(?)
+   * O(n)
    */
   unsigned int String::capacity() const{
       return 1;
@@ -82,7 +98,7 @@ String::~String() {
 
   /** reserve(int extra)
    * Reserves extra amount of characters, extending the capacity of the string.
-   * O(?)
+   * O(n)
    */
   void String::reserve(unsigned int x){
       
@@ -91,23 +107,29 @@ String::~String() {
   /** insert(char c, int index)
    * Inserts the given character `c` into the string at the given index.
    * If the index is out of bounds the character should appended / prepended.
-   * O(?)
+   * O(1)
    */
   void String::insert(char x, int y){
+      array[y]=x;
 
   }
 
   /** erase(char)
    * Erases all copies of the given character from the string.
-   * O(?)
+   * O(n)
    */
   void String::erase(char x){
+      for(int i=0;array[i]!=NULL;i++){
+          if (array[i]=x){
+              array[i]=' ';
+          }
+      }
 
   }
 
   /** remove(int index)
    * Removes the character at the given index.
-   * O(?)
+   * O(1)
    */
   void String::remove(int x){
 
@@ -115,7 +137,7 @@ String::~String() {
 
   /** append(char)
    * Appends the given character to the string.
-   * O(?)
+   * O(1)
    */
   void String::append(char x){
 
@@ -123,7 +145,7 @@ String::~String() {
 
   /** prepend(char)
    * Prepends the given character to the string.
-   * O(?)
+   * O(1)
    */
   void String::prepend(char x){
 
@@ -131,7 +153,7 @@ String::~String() {
 
   /** compare(char* or String)
    * Returns whether or not the string is equal with the one given.
-   * O(?)
+   * O(n)
    */
   bool String::compare(char* x) const{
       return true;
@@ -142,7 +164,7 @@ String::~String() {
 
   /** concate(char* or String)
    * Concatenates the string with the given character array, or string.
-   * O(?)
+   * O(1)
    */
   void String::concatenate(char* x){
 
@@ -154,7 +176,7 @@ String::~String() {
   /** find(char* or char or String)
    * Returns the index of the first occurrence of the character array, char, or
    * string given. Should return length if not found.
-   * O(?)
+   * O(n)
    */
   unsigned int String::find(char*, int start) const{
       return 1;
@@ -168,7 +190,7 @@ String::~String() {
 
   /** reverse()
    * Reverses the string in-place.
-   * O(?)
+   * O(n)
    */
   void String::reverse(){
 
@@ -178,16 +200,30 @@ String::~String() {
    * Shifts all characters ASCII values in the array upwards or downwards by the
    * amount given. This method should also prevent characters from becoming
    * null, or exceeding the ASCII range.
-   * O(?)
+   * O(n)
    */
   void String::shift(int x){
+      for(int i=0;array[i]!=NULL;i++){
+          char originalChar=array[i];
+          if (x<0){
+            int shiftedChar=int (originalChar);
+            shiftedChar--;
+            array[i]=char(shiftedChar);
+          }
+          else{
+            int shiftedChar=int (originalChar);
+            shiftedChar++;
+            array[i]=char(shiftedChar);
+          }
+
+      }
 
   }
 
   /** toInt()
    * Returns the string as an integer, if it can be represented as one.
    * Otherwise throws an exception
-   * O(?)
+   * O(n)
    */
   int String::toInt() const{
       return 1;
